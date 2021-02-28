@@ -28,6 +28,12 @@ If you use =straight.el= (you should!) with =use-package=, you can copy this con
 
 *NOTE*: Make sure to update the paths and Org files to reflect your actual dotfiles path and configuration files!
 
+** WARNING: Naming of variables and commands could change at any time!
+
+Like I mentioned before, this package is in early development.  Since we're still fleshing things out, certain commands could be renamed, removed, or broken into pieces as things progress.  I might also rename the project if someone suggests a better name :)
+
+Just make sure to not take a strong dependency on this just yet if you want to try it!
+
 * Contributing
 
 For now I won't be accepting contributions because I'm trying to keep the codebase focused on what we're doing in the Learning Emacs Lisp series.  However, once that series is mostly concluded, I would love to have contributions from the community!
