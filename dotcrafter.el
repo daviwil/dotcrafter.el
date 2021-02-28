@@ -18,7 +18,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
   (let ((org-confirm-babel-evaluate nil)
         (message-log-max nil)
         (inhibit-message t))
-    (org-babel-tangle-file (expand-file-name org-file dotfiles-folder))))
+    (org-babel-tangle-file (expand-file-name org-file dotcrafter-dotfiles-folder))))
 
 (defun dotcrafter-tangle-org-files ()
   "Tangles all of the .org files in the paths specified by the variable dotfiles-folder"
