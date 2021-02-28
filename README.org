@@ -2,13 +2,13 @@
 
 * Overview
 
-=dotcrafter.el= is an Emacs package that helps you manage your personal configuration files for your applications and systems, commonly known as "dotfiles."
+=dotcrafter.el= is an Emacs package that helps you manage your personal configuration files for your applications and systems, commonly known as [[https://www.youtube.com/watch?v=BE87kUCTBVU]["dotfiles."]]
 
 This package is designed to make it easier to manage all of your configuration files in [[https://orgmode.org][Org Mode]] files using [[https://orgmode.org/worg/org-contrib/babel/][Org Babel]] source blocks that are tangled out to locations inside of your dotfiles folder.  Those files will then be symbolically linked to the real file paths in your home directory!
 
 If you've been using [[https://www.gnu.org/software/stow/][GNU Stow]] for managing symbolic links for your dotfiles folder, you will no longer need it thanks to this package!
 
-*NOTE*: This package is currently in early development!  It is being created as part of the Learning Emacs Lisp series on the System Crafters YouTube channel.  As of yet some of the features I just mentioned above (symbolic linking specifically) won't have been implemented yet.  Soon :)
+*NOTE*: This package is currently in early development!  It is being created as part of the [[https://www.youtube.com/watch?v=RQK_DaaX34Q&list=PLEoMzSkcN8oPQtn7FQEF3D7sroZbXuPZ7][Learning Emacs Lisp]] series on the [[https://youtube.com/c/SystemCrafters][System Crafters YouTube channel]].  As of yet some of the features I just mentioned above (symbolic linking specifically) won't have been implemented yet.  Soon :)
 
 * Usage
 
