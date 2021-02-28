@@ -12,7 +12,7 @@ If you've been using [[https://www.gnu.org/software/stow/][GNU Stow]] for managi
 
 * Usage
 
-For now the package isn't very useful, but if you want to try it you can either clone the repository and add it to Emacs' load path.
+For now the package isn't very useful, but if you want to try it you can clone the repository and add it to Emacs' load path.
 
 If you use =straight.el= (you should!) with =use-package=, you can copy this configuration:
 
