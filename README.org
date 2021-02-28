@@ -1,0 +1,37 @@
+#+title: dotcrafter.el - Manage your dotfiles with Emacs!
+
+* Overview
+
+=dotcrafter.el= is an Emacs package that helps you manage your personal configuration files for your applications and systems, commonly known as "dotfiles."
+
+This package is designed to make it easier to manage all of your configuration files in [[https://orgmode.org][Org Mode]] files using [[https://orgmode.org/worg/org-contrib/babel/][Org Babel]] source blocks that are tangled out to locations inside of your dotfiles folder.  Those files will then be symbolically linked to the real file paths in your home directory!
+
+If you've been using [[https://www.gnu.org/software/stow/][GNU Stow]] for managing symbolic links for your dotfiles folder, you will no longer need it thanks to this package!
+
+*NOTE*: This package is currently in early development!  It is being created as part of the Learning Emacs Lisp series on the System Crafters YouTube channel.  As of yet some of the features I just mentioned above (symbolic linking specifically) won't have been implemented yet.  Soon :)
+
+* Usage
+
+For now the package isn't very useful, but if you want to try it you can either clone the repository and add it to Emacs' load path.
+
+If you use =straight.el= (you should!) with =use-package=, you can copy this configuration:
+
+#+begin_src emacs-lisp
+
+  (use-package dotcrafter
+    :straight '(dotcrafter :host github :repo "daviwil/dotcrafter")
+    :custom
+    (dotcrafter-dotfiles-folder "~/.dotfiles")
+    (dotcrafter-org-files '("Emacs.org" "Desktop.org")))
+
+#+end_src
+
+*NOTE*: Make sure to update the paths and Org files to reflect your actual dotfiles path and configuration files!
+
+* Contributing
+
+For now I won't be accepting contributions because I'm trying to keep the codebase focused on what we're doing in the Learning Emacs Lisp series.  However, once that series is mostly concluded, I would love to have contributions from the community!
+
+* License
+
+This project is licensed under the [[file:LICENSE][GNU General Public License v3]].
