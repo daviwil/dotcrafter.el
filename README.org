@@ -19,7 +19,7 @@ If you use =straight.el= (you should!) with =use-package=, you can copy this con
 #+begin_src emacs-lisp
 
   (use-package dotcrafter
-    :straight '(dotcrafter :host github :repo "daviwil/dotcrafter")
+    :straight '(dotcrafter :host github :repo "daviwil/dotcrafter.el")
     :custom
     (dotcrafter-dotfiles-folder "~/.dotfiles")
     (dotcrafter-org-files '("Emacs.org" "Desktop.org")))
