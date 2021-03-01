@@ -23,7 +23,7 @@ files begins.")
                              (find-file-noselect org-file))
       ;; Save the current buffer position
       (save-excursion
-        ;; Go back to the beginnng of the buffer
+        ;; Go back to the beginning of the buffer
         (goto-char (point-min))
 
         ;; Loop until no more matches are found
@@ -31,11 +31,11 @@ files begins.")
           ;; Search for blocks with a :tangle property
           (setq current-match (search-forward ":tangle " nil t))
           (when current-match
-            (let ((file-path (thing-at-point 'filename t)))
+            (let ((output-file (thing-at-point 'filename t)))
               ;; If a file path was found, add it to the list
-              (unless (or (not file-path)
-                          (string-equal file-path "no"))
-                (setq output-files (cons file-path
+              (unless (or (not output-file)
+                          (string-equal output-file "no"))
+                (setq output-files (cons output-file
                                          output-files))))))))
     output-files))
 
