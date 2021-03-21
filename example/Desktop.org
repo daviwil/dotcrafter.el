@@ -1,1 +1,40 @@
 #+title: Desktop Environment Configuration
+#+PROPERTY: header-args :mkdirp yes
+
+This is a simple example of an Emacs configuration in an Org Mode file which generates configuration files for a desktop environment.
+
+* Fonts and Themes
+
+I use [[https://github.com/derat/xsettingsd][xsettingsd]] as a minimal settings daemon for Xorg applications.  It replaces similar daemons from desktop environments like GNOME and XFCE and enables me to use a simple configuration file like the following:
+
+*.config/xsettingsd/xsettingsd.conf:*
+
+#+begin_src conf :tangle .files/.config/xsettingsd/xsettingsd.conf :noweb yes
+
+Net/ThemeName "Matcha-dark-azul"
+Net/IconThemeName "Papirus-Dark"
+Gtk/DecorationLayout "menu:minimize,maximize,close"
+Gtk/FontName "Cantarell 11"
+Gtk/MonospaceFontName "Fira Mono 10"
+Gtk/CursorThemeName "Adwaita"
+Xft/Antialias 1
+Xft/Hinting 0
+Xft/HintStyle "hintnone"
+Xft/DPI 184320 # 1024 * DPI
+
+#+end_src
+
+* Default Applications
+
+The file =.config/mimeapps.list= configures default applications for various content types.  Right now I'm using it to control which browser opens URLs from other applications.
+
+#+begin_src conf :tangle .files/.config/mimeapps.list
+
+  [Default Applications]
+  text/html=qutebrowser.desktop
+  x-scheme-handler/http=qutebrowser.desktop
+  x-scheme-handler/https=qutebrowser.desktop
+  x-scheme-handler/about=qutebrowser.desktop
+  x-scheme-handler/unknown=qutebrowser.desktop
+
+#+end_src

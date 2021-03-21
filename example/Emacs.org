@@ -1,7 +1,7 @@
 #+title: Emacs Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle .files/.emacs.d/init.el :mkdirp yes
 
-This is a simple example of an Emacs configuration in an Org Mode file which generates
+This is a simple example of an Emacs configuration in an Org Mode file which generates an Emacs configuration file.
 
 * Package Management
 
