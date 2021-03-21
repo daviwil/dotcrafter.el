@@ -16,15 +16,15 @@ which contain configuration files that should be tangled"
   :type '(list string)
   :group 'dotfiles)
 
-(defcustom dotcrafter-extra-files-directory ".files"
+(defcustom dotcrafter-config-files-directory ".files"
   "The directory path inside of `dotcrafter-dotfiles-folder' where
-\"extra\" configuration files are stored."
+configuration files that should be symbolically linked are stored."
   :type 'string
   :group 'dotfiles)
 
 (defcustom dotcrafter-ensure-output-directories '(".config" ".local/share")
   "List of directories in the output folder that should be created
-before linking \"extra\" configuration files."
+before linking configuration files."
   :type  '(list string)
   :group 'dotfiles)
 
@@ -110,12 +110,12 @@ file if it is an org-mode buffer inside of dotfiles-folder."
     (dotcrafter-tangle-org-file org-file))
   (message "Dotfiles are up to date!"))
 
-(defun dotcrafter--link-extra-file (extra-file)
+(defun dotcrafter--link-config-file (config-file)
   ;; Get the "path parts", basically the name of each directory and file in the
-  ;; path of extra-file
+  ;; path of config-file
   (let* ((path-parts
-          (split-string (file-relative-name (expand-file-name extra-file)
-                                            (expand-file-name dotcrafter-extra-files-directory
+          (split-string (file-relative-name (expand-file-name config-file)
+                                            (expand-file-name dotcrafter-config-files-directory
                                                               dotcrafter-dotfiles-folder))
                         "/" t))
          (current-path nil))
@@ -130,7 +130,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
       (setq path-parts (cdr path-parts))
 
       ;; Figure out whether the current source path can be linked to the target path
-      (let ((source-path (expand-file-name (concat dotcrafter-extra-files-directory "/" current-path)
+      (let ((source-path (expand-file-name (concat dotcrafter-config-files-directory "/" current-path)
                                            dotcrafter-dotfiles-folder))
             (target-path (expand-file-name current-path dotcrafter-output-directory)))
         ;; If the file or directory exists, is it a symbolic link?
@@ -149,11 +149,11 @@ file if it is an org-mode buffer inside of dotfiles-folder."
             (make-symbolic-link source-path target-path)
             (setq path-parts '())))))))
 
-(defun dotcrafter-link-extra-files ()
+(defun dotcrafter-link-config-files ()
   (interactive)
-  (let ((extra-files
+  (let ((config-files
          (directory-files-recursively
-          (expand-file-name dotcrafter-extra-files-directory
+          (expand-file-name dotcrafter-config-files-directory
                             dotcrafter-dotfiles-folder)
           "")))
     ;; Ensure that the expected output directories are already
@@ -162,7 +162,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
       (make-directory (expand-file-name dir dotcrafter-output-directory) t))
 
     ;; Link all of the source config files to the output path
-    (dolist (file extra-files)
-      (dotcrafter--link-extra-file file))))
+    (dolist (file config-files)
+      (dotcrafter--link-config-file file))))
 
 (provide 'dotcrafter)

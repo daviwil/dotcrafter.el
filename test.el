@@ -6,4 +6,4 @@
 
 (setq dotcrafter-output-directory (expand-file-name "./demo"))
 
-(dotcrafter-link-extra-files)
+(dotcrafter-link-config-files)
