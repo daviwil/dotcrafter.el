@@ -126,7 +126,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
     ;; Whenever path-parts is nil, stop looping!
     (while path-parts
       ;; Create the current path using the first part and remove it from the
-      ;; front of the list for future recursive calls
+      ;; front of the list for future iterations
       (setq current-path (if current-path
                              (concat current-path "/" (car path-parts))
                            (car path-parts)))
@@ -145,7 +145,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
               (setq path-parts '()))
           ;; If the target path is an existing directory, we need to keep
           ;; looping, otherwise we can create a symlink here!
-          ;; Otherwise, the file is probably a directory so recurse
+          ;; Otherwise, the file is probably a directory so keep looping
           (when (not (file-directory-p target-path))
             ;; Create a symbolic link to the source-path and
             ;; clear the path-parts so that we stop looping
