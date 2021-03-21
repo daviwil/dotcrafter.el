@@ -1,4 +1,4 @@
-;; Run this script with: emacs -Q --batch -l test.el
+;; Run this script with: emacs -Q --batch -l demo.el
 (load-file "dotcrafter.el")
 
 ;; TODO: Check for flag to delete output folder first
