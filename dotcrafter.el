@@ -5,8 +5,8 @@
 
 (defcustom dotcrafter-output-directory "~"
   "The directory where dotcrafter.el will write out your dotfiles.
-This is typically set to '~' but can be changed for testing
-purposes."
+This is typically set to the home directory but can be changed
+for testing purposes."
   :type 'string
   :group 'dotfiles)
 
