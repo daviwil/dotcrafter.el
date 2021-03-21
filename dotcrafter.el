@@ -1,3 +1,6 @@
+;; When running dotcrafter in a script, org might not be loaded yet
+(require 'org)
+
 (defcustom dotcrafter-dotfiles-folder "~/.dotfiles"
   "The folder where dotfiles and org-mode configuration files are stored."
   :type 'string
@@ -164,5 +167,17 @@ file if it is an org-mode buffer inside of dotfiles-folder."
     ;; Link all of the source config files to the output path
     (dolist (file config-files)
       (dotcrafter--link-config-file file))))
+
+(defun dotcrafter-update-dotfiles ()
+  "Generate and link configuration files to the output directory.
+
+This command handles the full process of \"tangling\" Org Mode
+files containing configuration blocks and creating symbolic links
+to those configuration files in the output directory, typically
+the user's home directory."
+  (interactive)
+  (dotcrafter-tangle-org-files)
+  (dotcrafter-link-config-files)
+  (dotcrafter--update-gitignore))
 
 (provide 'dotcrafter)
