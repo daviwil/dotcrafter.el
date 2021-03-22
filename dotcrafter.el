@@ -113,13 +113,16 @@ file if it is an org-mode buffer inside of dotfiles-folder."
     (dotcrafter-tangle-org-file org-file))
   (message "Dotfiles are up to date!"))
 
+(defun dotcrafter--resolve-config-files-path ()
+  (expand-file-name dotcrafter-config-files-directory
+                    dotcrafter-dotfiles-folder))
+
 (defun dotcrafter--link-config-file (config-file)
   ;; Get the "path parts", basically the name of each directory and file in the
   ;; path of config-file
   (let* ((path-parts
           (split-string (file-relative-name (expand-file-name config-file)
-                                            (expand-file-name dotcrafter-config-files-directory
-                                                              dotcrafter-dotfiles-folder))
+                                            (dotcrafter--resolve-config-files-path))
                         "/" t))
          (current-path nil))
     ;; Check each "part" of the path to find the right place to create the symlink.
@@ -156,8 +159,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
   (interactive)
   (let ((config-files
          (directory-files-recursively
-          (expand-file-name dotcrafter-config-files-directory
-                            dotcrafter-dotfiles-folder)
+          (dotcrafter--resolve-config-files-path)
           "")))
     ;; Ensure that the expected output directories are already
     ;; created so that links will be created inside
@@ -167,6 +169,31 @@ file if it is an org-mode buffer inside of dotfiles-folder."
     ;; Link all of the source config files to the output path
     (dolist (file config-files)
       (dotcrafter--link-config-file file))))
+
+(defun dotcrafter-move-to-config-files (&optional source-path)
+  "Move a file from the output path to the configuration path."
+  (interactive "FConfiguration path to move: ")
+  (let* ((relative-path (file-relative-name (expand-file-name source-path)
+                                            dotcrafter-output-directory))
+         (dest-path (expand-file-name relative-path
+                                      (dotcrafter--resolve-config-files-path)))
+         ;; Strip any trailing slash so that we can treat the directory as file
+         (dest-path (if (string-suffix-p "/" dest-path)
+                        (substring dest-path 0 -1)
+                      dest-path)))
+    ;; Make sure that the path is under the output directory and that it
+    ;; doesn't already exist
+    (when (string-prefix-p ".." relative-path)
+      (error "Copied path is not inside of config output directory: %s" dotcrafter-output-directory))
+    (when (file-exists-p dest-path)
+      (error "Can't copy path because it already exists in the configuration directory: %s" dest-path))
+
+    ;; Ensure that parent directories exist and then move the file!
+    (make-directory (file-name-directory dest-path) t)
+    (rename-file source-path dest-path)
+
+    ;; Relink the path back to the output directory
+    (dotcrafter--link-config-file dest-path)))
 
 (defun dotcrafter-update-dotfiles ()
   "Generate and link configuration files to the output directory.
