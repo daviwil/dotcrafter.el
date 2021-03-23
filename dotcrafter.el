@@ -170,7 +170,7 @@ file if it is an org-mode buffer inside of dotfiles-folder."
     (dolist (file config-files)
       (dotcrafter--link-config-file file))))
 
-(defun dotcrafter-move-to-config-files (&optional source-path)
+(defun dotcrafter-move-to-config-files (source-path)
   "Move a file from the output path to the configuration path."
   (interactive "FConfiguration path to move: ")
   (let* ((relative-path (file-relative-name (expand-file-name source-path)
